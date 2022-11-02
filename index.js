@@ -29,13 +29,65 @@ function question1() {
         type: 'list',
         message: 'What would you like to do?',
         name: 'action',
-        choices: ['View all Employees', 'Add Employee', 'Update Employee Role', 'View all roles', 'Add role', 'View all departments', 'Add Department', 'Quit']
+        choices: ['View all employees', 'Add employee', 'Update employee role', 'View all roles', 'Add role', 'View all departments', 'Add department', 'Quit']
     },
     ])
-    .then((response) =>  (response))
-    return AddRole();
+    .then(function(response) {
+        switch(response) {
+            case 'View all employees' :
+                return 
+
+            case 'Add employee' :
+                return
+
+            case 'Update Employee Role' :
+                return
+
+            case 'View all roles' :
+                return
+
+            case 'Add role' :
+                return AddRole();
+
+            case 'View all departments' :
+                return 
+
+            case 'Add department' :
+                return AddDepartment();
+
+            case 'Quit' :
+                return
+
+        }
+
+    })
+    if ('Add Employee') {
+    return AddDepartment();
+    } if ('Add Role')
+}
+
+function AddDepartment() {
+    inquirer
+    .prompt([
+        {
+            type: 'input',
+            message: 'What is the name of the department?',
+            name: 'dep_name'
+        }
+        ])
+        .then((response) =>  (response))
+        return question1();
 }
 
 function AddRole() {
-    
+    inquirer
+    .prompt([
+        {
+            type: 'input',
+            message: 'What is the name of the role?',
+            name: 'role_name'
+        }
+        ])
+        .then((response) =>  (response))
+        return question1();
 }
