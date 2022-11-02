@@ -8,3 +8,11 @@ CREATE TABLE department (
   dep_name VARCHAR(30) NOT NULL
   REFERENCES roles(department_id)
 );
+
+CREATE TABLE roles (
+    id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+    title VARCHAR(30) NOT NULL,
+    salary DECIMAL NOT NULL,
+    department_id INT NOT NULL
+    REFERENCES employee(role_id)
+);
