@@ -21,3 +21,21 @@ const db = mysql.createConnection(
     },
     console.log(`Connected to the management_db database.`)
   );
+
+function question1() {
+    inquirer
+    .prompt([
+    {
+        type: 'list',
+        message: 'What would you like to do?',
+        name: 'action',
+        choices: ['View all Employees', 'Add Employee', 'Update Employee Role', 'View all roles', 'Add role', 'View all departments', 'Add Department', 'Quit']
+    },
+    ])
+    .then((response) =>  (response))
+    return AddRole();
+}
+
+function AddRole() {
+    
+}
