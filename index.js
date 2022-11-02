@@ -10,3 +10,14 @@ const app = express();
 // Express middleware
 app.use(express.urlencoded({ extended: false }));
 app.use(express.json());
+
+// Connect the database
+const db = mysql.createConnection(
+    {
+      host: 'localhost',
+      user: 'root',
+      password: 'rootroot',
+      database: 'management_db'
+    },
+    console.log(`Connected to the management_db database.`)
+  );
