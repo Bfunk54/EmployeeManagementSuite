@@ -119,17 +119,26 @@ function AddEmployee() {
     inquirer
     .prompt([
         {
-            type: 'input',
-            message: 'What is the name of the employee you are trying to add?',
-            name: 'emp_name'
+            message: 'What is the first name of the employee you are trying to add?',
+            name: 'first_name'
+        },
+        {
+            message: 'What is the last name of the employee you are trying to add?',
+            name: 'last_name'
+        },
+        {
+            type: 'list',
+            message: 'What is the role of the employee you are trying to add?',
+            name: 'role',
+            choices: ['Junior software developer', 'UX/UI Designer', 'Marketing/Sales', 'Accounting']
         },
 
         ])
         .then((function (response) {
-            db.query('INSERT INTO role SET ?', response, function (err, result){
-
+            db.query('INSERT INTO employee SET ?', response, function (err, result){
+                console.log(`${response.first_name} ${response.last_name} added to Employees.`);
             })
-        
+            question1();
         }))
 
         // .then(((function (response) {
