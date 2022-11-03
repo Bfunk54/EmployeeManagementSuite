@@ -22,6 +22,19 @@ const db = mysql.createConnection(
     console.log(`Connected to the management_db database.`)
   );
 
+  const quesArr = [
+    {
+
+    },
+    {
+
+    },
+    {
+
+    }
+
+];
+
 function question1() {
     inquirer
     .prompt([
@@ -32,37 +45,37 @@ function question1() {
         choices: ['View all employees', 'Add employee', 'Update employee role', 'View all roles', 'Add role', 'View all departments', 'Add department', 'Quit']
     },
     ])
-    .then(function(response) {
-        switch(response) {
+    .then(function (response) {
+        switch(response.action) {
             case 'View all employees' :
-                return 
+                break;
 
-            case 'Add employee' :
-                return AddEmployee();
+            case 'Add employee' : AddEmployee();
+                break;
 
-            case 'Update Employee Role' :
-                return 
+            case 'Update Employee Role' : 
+                break;
 
             case 'View all roles' :
-                return
+                break;
 
-            case 'Add role' :
-                return AddRole();
+            case 'Add role' : AddRole();
+                break;
 
             case 'View all departments' :
-                return 
+                break;
 
-            case 'Add department' :
-                return AddDepartment();
+            case 'Add department' : AddDepartment();
+                break;
 
             case 'Quit' :
-                return
-
+                break;
         }
     })
 }
 
 function AddDepartment() {
+
     inquirer
     .prompt([
         {
@@ -72,7 +85,8 @@ function AddDepartment() {
         }
         ])
         .then((response) =>  (response))
-        return question1();
+        
+        // return question1();
 }
 
 function AddRole() {
@@ -97,7 +111,8 @@ function AddRole() {
         
         ])
         .then((response) =>  (response))
-        return question1();
+        
+        // return question1();
 }
 
 function AddEmployee() {
@@ -110,8 +125,18 @@ function AddEmployee() {
         },
 
         ])
-        .then((response) =>  (response))
-        return question1();
+        .then((function (response) {
+            db.query('INSERT INTO role SET ?', response, function (err, result){
+
+            })
+        
+        }))
+
+        // .then(((function (response) {
+        //     question1();
+        // }))
+            
+            
 }
 
 function UpdateEmployeeRole() {
@@ -124,5 +149,7 @@ function UpdateEmployeeRole() {
         }
         ])
         .then((response) =>  (response))
-        return question1();
+        // return question1();
 }
+
+question1();
