@@ -91,7 +91,8 @@ function AddRole() {
         {
             type: 'list',
             message: 'What department does the role belong to?',
-            name: 'role_salary'
+            name: 'role_dep',
+            choices:
         }
         
         ])
