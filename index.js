@@ -38,10 +38,10 @@ function question1() {
                 return 
 
             case 'Add employee' :
-                return
+                return AddEmployee();
 
             case 'Update Employee Role' :
-                return
+                return 
 
             case 'View all roles' :
                 return
@@ -59,11 +59,7 @@ function question1() {
                 return
 
         }
-
     })
-    if ('Add Employee') {
-    return AddDepartment();
-    } if ('Add Role')
 }
 
 function AddDepartment() {
@@ -86,6 +82,44 @@ function AddRole() {
             type: 'input',
             message: 'What is the name of the role?',
             name: 'role_name'
+        },
+        {
+            type: 'input',
+            message: 'What is the salary of the role?',
+            name: 'role_salary'
+        },
+        {
+            type: 'list',
+            message: 'What department does the role belong to?',
+            name: 'role_salary'
+        }
+        
+        ])
+        .then((response) =>  (response))
+        return question1();
+}
+
+function AddEmployee() {
+    inquirer
+    .prompt([
+        {
+            type: 'input',
+            message: 'What is the name of the employee you are trying to add?',
+            name: 'emp_name'
+        },
+
+        ])
+        .then((response) =>  (response))
+        return question1();
+}
+
+function UpdateEmployeeRole() {
+    inquirer
+    .prompt([
+        {
+            type: 'input',
+            message: 'What is the name of the employee you are trying to add?',
+            name: 'emp_name'
         }
         ])
         .then((response) =>  (response))
