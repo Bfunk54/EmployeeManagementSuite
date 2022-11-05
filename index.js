@@ -174,25 +174,42 @@ function AddEmployee() {
             name: 'role',
             choices: ['Software developer', 'UX/UI Designer', 'Marketing/Sales', 'Accounting']
         },
-
+        {
+            message: 'What is the manager of the employee you are trying to add?',
+            name: 'manager'
+        }
         ])
         .then((function (response) {
-            let dep_id = `${response.role}`;
-            switch(dep_id) {
+            let role_id = `${response.role}`;
+            switch(role_id) {
                 case 'Software developer' :
-                    dep_id = 1;
+                    role_id = 1;
                     break;
                 case 'UX/UI Designer' :
-                    dep_id = 2;
+                    role_id = 2;
                     break;
                 case 'Marketing/Sales' :
-                    dep_id = 3;
+                    role_id = 3;
                     break;
                 case 'Accounting' :
-                    dep_id = 4;
+                    role_id = 4;
                     break;
             }
-            db.query(`INSERT INTO roles (title, salary, department_id) VALUES ('${response.role_name}', '${response.role_salary}', '${dep_id}')`, response, function (err, result){
+            switch(response.manager) {
+                case 'John Johnson' :
+                    response.manager = 1;
+                    break;
+                case 'Jane Johnson' :
+                    response.manager = 2;
+                    break;
+                case 'John Johnsonson' :
+                    response.manager = 3;
+                    break;
+                case 'Jane Johnsonson' :
+                    response.manager = 4;
+                    break;
+            }
+            db.query(`INSERT INTO employee (first_name, last_name, role_id, manager_id) VALUES ('${response.first_name}', '${response.last_name}', '${role_id}', '${response.manager}')`, response, function (err, result){
                 console.log(`${response.first_name} ${response.last_name} added to Employees.`);
             })
             question1();
