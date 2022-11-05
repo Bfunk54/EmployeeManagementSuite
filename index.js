@@ -84,9 +84,13 @@ function AddDepartment() {
             name: 'dep_name'
         }
         ])
-        .then((response) =>  (response))
-        
-        // return question1();
+        .then((function (response) {
+            db.query(`INSERT INTO department (name) VALUES ('${response.dep_name}')`, function(err, data) {
+                if (err) throw err;
+                console.log('Department added!');
+                question1();
+            })
+        }))
 }
 
 function AddRole() {
@@ -110,9 +114,45 @@ function AddRole() {
         }
         
         ])
-        .then((response) =>  (response))
+        .then((function (response) {
+            db.query(`INSERT INTO role (title, salary, department_id) VALUES ('${response.role_name}', '${response.role_salary}', '${response.role_dep}')`, function(err, data) {
+                if (err) throw err;
+                console.log('Role added!');
+                question1();
+            })
+        }))
+}
         
-        // return question1();
+function ViewAllEmployees() {
+    db.query(`SELECT * FROM employee`, function(err, data) {
+        if (err) throw err;
+        console.log('All employees:');
+        console.table(data);
+        question1();
+    })
+}
+
+function ViewAllRoles() {
+    db.query(`SELECT * FROM role`, function(err, data) {
+        if (err) throw err;
+        console.log('All roles:');
+        console.table(data);
+        question1();
+    })
+}
+
+function ViewAllDepartments() {
+    db.query(`SELECT * FROM department`, function(err, data) {
+        if (err) throw err;
+        console.log('All departments:');
+        console.table(data);
+        question1();
+    })
+}
+
+function Quit() {
+    console.log('Goodbye!');
+    process.exit();
 }
 
 function AddEmployee() {
@@ -139,13 +179,7 @@ function AddEmployee() {
                 console.log(`${response.first_name} ${response.last_name} added to Employees.`);
             })
             question1();
-        }))
-
-        // .then(((function (response) {
-        //     question1();
-        // }))
-            
-            
+        }))       
 }
 
 function UpdateEmployeeRole() {
@@ -157,8 +191,12 @@ function UpdateEmployeeRole() {
             name: 'emp_name'
         }
         ])
-        .then((response) =>  (response))
-        // return question1();
+        .then((function (response) {
+            db.query('INSERT INTO employee SET ?', response, function (err, result){
+                console.log(`${response.emp_name} added to Employees.`);
+            })
+            question1();
+        }))
 }
 
 question1();
