@@ -20,20 +20,7 @@ const db = mysql.createConnection(
       database: 'management_db'
     },
     console.log(`Connected to the management_db database.`)
-  );
-
-  const quesArr = [
-    {
-
-    },
-    {
-
-    },
-    {
-
-    }
-
-];
+);
 
 function question1() {
     inquirer
@@ -170,7 +157,7 @@ function AddEmployee() {
             type: 'list',
             message: 'What is the role of the employee you are trying to add?',
             name: 'role',
-            choices: ['Junior software developer', 'UX/UI Designer', 'Marketing/Sales', 'Accounting']
+            choices: ['Software developer', 'UX/UI Designer', 'Marketing/Sales', 'Accounting']
         },
 
         ])
