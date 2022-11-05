@@ -1,3 +1,4 @@
+INSERT INTO employee SET
 [
   {
     "title": "UX/UI Designer",
@@ -20,8 +21,18 @@
     "department_id": "37t8"
   },
   {
-    "title": "Sales Manager",
-    "salary": "80000",
+    "title": "Marketing Manager",
+    "salary": "100000",
+    "department_id": "37t8"
+  },
+  {
+    "title": "HR Manager",
+    "salary": "100000",
+    "department_id": "37t8"
+  },
+  {
+    "title": "CEO",
+    "salary": "200000",
     "department_id": "37t8"
   },
   {

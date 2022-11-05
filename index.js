@@ -97,12 +97,27 @@ function AddRole() {
             type: 'list',
             message: 'What department does the role belong to?',
             name: 'role_dep',
-            choices:''
+            choices:['Tech', 'Management', 'Marketing/Sales', 'Finance']
         }
         
         ])
         .then((function (response) {
-            db.query(`INSERT INTO role (title, salary, department_id) VALUES ('${response.role_name}', '${response.role_salary}', '${response.role_dep}')`, function(err, data) {
+            let dep_id = `${response.role_dep}`;
+            switch(dep_id) {
+                case 'Tech' :
+                    dep_id = 1;
+                    break;
+                case 'Management' :
+                    dep_id = 2;
+                    break;
+                case 'Marketing/Sales' :
+                    dep_id = 3;
+                    break;
+                case 'Finance' :
+                    dep_id = 4;
+                    break;
+            }
+            db.query(`INSERT INTO roles (title, salary, department_id) VALUES ('${response.role_name}', '${response.role_salary}', '${dep_id}')`, function(err, data) {
                 if (err) throw err;
                 console.log('Role added!');
                 question1();
@@ -162,7 +177,22 @@ function AddEmployee() {
 
         ])
         .then((function (response) {
-            db.query('INSERT INTO employee SET ?', response, function (err, result){
+            let dep_id = `${response.role}`;
+            switch(dep_id) {
+                case 'Software developer' :
+                    dep_id = 1;
+                    break;
+                case 'UX/UI Designer' :
+                    dep_id = 2;
+                    break;
+                case 'Marketing/Sales' :
+                    dep_id = 3;
+                    break;
+                case 'Accounting' :
+                    dep_id = 4;
+                    break;
+            }
+            db.query(`INSERT INTO roles (title, salary, department_id) VALUES ('${response.role_name}', '${response.role_salary}', '${dep_id}')`, response, function (err, result){
                 console.log(`${response.first_name} ${response.last_name} added to Employees.`);
             })
             question1();
