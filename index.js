@@ -34,28 +34,28 @@ function question1() {
     ])
     .then(function (response) {
         switch(response.action) {
-            case 'View all employees' :
+            case 'View all employees' : ViewAllEmployees();
                 break;
 
             case 'Add employee' : AddEmployee();
                 break;
 
-            case 'Update Employee Role' : 
+            case 'Update Employee Role' : UpdateEmployeeRole();
                 break;
 
-            case 'View all roles' :
+            case 'View all roles' : ViewAllRoles();
                 break;
 
             case 'Add role' : AddRole();
                 break;
 
-            case 'View all departments' :
+            case 'View all departments' : ViewAllDepartments();
                 break;
 
             case 'Add department' : AddDepartment();
                 break;
 
-            case 'Quit' :
+            case 'Quit' : Quit();
                 break;
         }
     })
@@ -175,8 +175,10 @@ function AddEmployee() {
             choices: ['Software developer', 'UX/UI Designer', 'Marketing/Sales', 'Accounting']
         },
         {
+            type: 'list',
             message: 'What is the manager of the employee you are trying to add?',
-            name: 'manager'
+            name: 'manager',
+            choices: ['John Johnson', 'Jane Johnson', 'John Johnsonson', 'Jane Johnsonson']
         }
         ])
         .then((function (response) {
@@ -220,17 +222,42 @@ function UpdateEmployeeRole() {
     inquirer
     .prompt([
         {
-            type: 'input',
-            message: 'What is the name of the employee you are trying to add?',
-            name: 'emp_name'
+            message: 'What is the first name of the employee you are trying to update?',
+            name: 'first_name'
+        },
+        {
+            message: 'What is the last name of the employee you are trying to update?',
+            name: 'last_name'
+        },
+        {
+            type: 'list',
+            message: 'What is the new role of the employee you are trying to update?',
+            name: 'role',
+            choices: ['Software developer', 'UX/UI Designer', 'Marketing/Sales', 'Accounting']
         }
         ])
         .then((function (response) {
-            db.query('INSERT INTO employee SET ?', response, function (err, result){
-                console.log(`${response.emp_name} added to Employees.`);
+            let role_id = `${response.role}`;
+            switch(role_id) {
+                case 'Software developer' :
+                    role_id = 1;
+                    break;
+                case 'UX/UI Designer' :
+                    role_id = 2;
+                    break;
+                case 'Marketing/Sales' :
+                    role_id = 3;
+                    break;
+                case 'Accounting' :
+                    role_id = 4;
+                    break;
+            }
+            db.query(`UPDATE employee SET role_id = '${role_id}' WHERE first_name = '${response.first_name}' AND last_name = '${response.last_name}'`, response, function (err, result){
+                console.log(`${response.first_name} ${response.last_name} updated.`);
             })
             question1();
-        }))
+        }
+        ))
 }
 
 question1();
