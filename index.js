@@ -43,7 +43,7 @@ function question1() {
             case 'Add employee' : AddEmployee();
                 break;
 
-            case 'Update Employee Role' : UpdateEmployeeRole();
+            case 'Update employee role' : UpdateEmployeeRole();
                 break;
 
             case 'View all roles' : ViewAllRoles();
@@ -253,7 +253,7 @@ function UpdateEmployeeRole() {
             type: 'list',
             message: 'What is the new role of the employee you are trying to update?',
             name: 'role',
-            choices: ['Software developer', 'UX/UI Designer', 'Marketing/Sales', 'Accounting']
+            choices: roleChoices.choices
         }
         ])
         .then((function (response) {
