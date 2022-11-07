@@ -72,7 +72,7 @@ function AddDepartment() {
         }
         ])
         .then((function (response) {
-            db.query(`INSERT INTO department (name) VALUES ('${response.dep_name}')`, function(err, data) {
+            db.query(`INSERT INTO department (dep_name) VALUES ('${response.dep_name}')`, function(err, data) {
                 if (err) throw err;
                 console.log('Department added!');
                 question1();
@@ -135,7 +135,7 @@ function ViewAllEmployees() {
 }
 
 function ViewAllRoles() {
-    db.query(`SELECT * FROM role`, function(err, data) {
+    db.query(`SELECT * FROM roles`, function(err, data) {
         if (err) throw err;
         console.log('All roles:');
         console.table(data);
@@ -172,7 +172,7 @@ function AddEmployee() {
             type: 'list',
             message: 'What is the role of the employee you are trying to add?',
             name: 'role',
-            choices: ['Software developer', 'UX/UI Designer', 'Marketing/Sales', 'Accounting']
+            choices: ['Software developer', 'UX/UI Designer', 'Salesman', 'Accountant', 'CFO', 'CEO', 'CTO', 'HR Manager', 'Marketing Manager']
         },
         {
             type: 'list',
@@ -195,6 +195,21 @@ function AddEmployee() {
                     break;
                 case 'Accounting' :
                     role_id = 4;
+                    break;
+                case 'CFO' :
+                    role_id = 5;
+                    break;
+                case 'CEO' :
+                    role_id = 6;
+                    break;
+                case 'CTO' :
+                    role_id = 7;
+                    break;
+                case 'HR Manager' :
+                    role_id = 8;
+                    break;
+                case 'Marketing Manager' :
+                    role_id = 9;
                     break;
             }
             switch(response.manager) {
