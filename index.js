@@ -22,6 +22,9 @@ const db = mysql.createConnection(
     console.log(`Connected to the management_db database.`)
 );
 
+let roleChoices = { choices: ['Software developer', 'UX/UI Designer', 'Salesman', 'Accountant', 'CFO', 'CEO', 'CTO', 'HR Manager', 'Marketing Manager'] };
+let depChoices = { choices: ['Tech', 'Management', 'Marketing/Sales', 'Finance'] };
+
 function question1() {
     inquirer
     .prompt([
@@ -75,6 +78,7 @@ function AddDepartment() {
             db.query(`INSERT INTO department (dep_name) VALUES ('${response.dep_name}')`, function(err, data) {
                 if (err) throw err;
                 console.log('Department added!');
+                depChoices.choices.push(response.dep_name);
                 question1();
             })
         }))
@@ -97,7 +101,7 @@ function AddRole() {
             type: 'list',
             message: 'What department does the role belong to?',
             name: 'role_dep',
-            choices:['Tech', 'Management', 'Marketing/Sales', 'Finance']
+            choices: depChoices.choices
         }
         
         ])
@@ -120,6 +124,7 @@ function AddRole() {
             db.query(`INSERT INTO roles (title, salary, department_id) VALUES ('${response.role_name}', '${response.role_salary}', '${dep_id}')`, function(err, data) {
                 if (err) throw err;
                 console.log('Role added!');
+                roleChoices.choices.push(response.role_name);
                 question1();
             })
         }))
@@ -172,7 +177,7 @@ function AddEmployee() {
             type: 'list',
             message: 'What is the role of the employee you are trying to add?',
             name: 'role',
-            choices: ['Software developer', 'UX/UI Designer', 'Salesman', 'Accountant', 'CFO', 'CEO', 'CTO', 'HR Manager', 'Marketing Manager']
+            choices: roleChoices.choices
         },
         {
             type: 'list',
