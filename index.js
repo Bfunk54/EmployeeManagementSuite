@@ -24,6 +24,7 @@ const db = mysql.createConnection(
 
 let roleChoices = { choices: ['Software developer', 'UX/UI Designer', 'Sales Manager', 'Accountant', 'CEO', 'HR Manager', 'Marketing Manager', 'Sales Associate'] };
 let depChoices = { choices: ['Tech', 'Management', 'Marketing/Sales', 'Finance'] };
+let managerChoices = { choices: ['John Johnson', 'Jane Johnson', 'John Johnsonson', 'Jane Johnsonson'] };
 
 function question1() {
     inquirer
@@ -106,22 +107,8 @@ function AddRole() {
         
         ])
         .then((function (response) {
-            let dep_id = `${response.role_dep}`;
-            switch(dep_id) {
-                case 'Tech' :
-                    dep_id = 1;
-                    break;
-                case 'Management' :
-                    dep_id = 2;
-                    break;
-                case 'Marketing/Sales' :
-                    dep_id = 3;
-                    break;
-                case 'Finance' :
-                    dep_id = 4;
-                    break;
-            }
-            db.query(`INSERT INTO roles (title, salary, department_id) VALUES ('${response.role_name}', '${response.role_salary}', '${dep_id}')`, function(err, data) {
+            let found = (depChoices.choices).indexOf(`${response.role_dep}`);
+            db.query(`INSERT INTO roles (title, salary, department_id) VALUES ('${response.role_name}', '${response.role_salary}', '${found}')`, function(err, data) {
                 if (err) throw err;
                 console.log('Role added!');
                 roleChoices.choices.push(response.role_name);
@@ -188,21 +175,8 @@ function AddEmployee() {
         ])
         .then((function (response) {
             let found = (roleChoices.choices).indexOf(`${response.role}`);
-            switch(response.manager) {
-                case 'John Johnson' :
-                    response.manager = 1;
-                    break;
-                case 'Jane Johnson' :
-                    response.manager = 2;
-                    break;
-                case 'John Johnsonson' :
-                    response.manager = 3;
-                    break;
-                case 'Jane Johnsonson' :
-                    response.manager = 4;
-                    break;
-            }
-            db.query(`INSERT INTO employee (first_name, last_name, role_id, manager_id) VALUES ('${response.first_name}', '${response.last_name}', '${found}', '${response.manager}')`, response, function (err, result){
+            let found2 = (managerChoices.choices).indexOf(`${response.manager}`);
+            db.query(`INSERT INTO employee (first_name, last_name, role_id, manager_id) VALUES ('${response.first_name}', '${response.last_name}', '${found}', '${found2}')`, response, function (err, result){
                 console.log(`${response.first_name} ${response.last_name} added to Employees.`);
             })
             question1();
