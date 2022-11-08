@@ -22,7 +22,7 @@ const db = mysql.createConnection(
     console.log(`Connected to the management_db database.`)
 );
 
-let roleChoices = { choices: ['Software developer', 'UX/UI Designer', 'Salesman', 'Accountant', 'CFO', 'CEO', 'CTO', 'HR Manager', 'Marketing Manager'] };
+let roleChoices = { choices: ['Software developer', 'UX/UI Designer', 'Sales Manager', 'Accountant', 'CEO', 'HR Manager', 'Marketing Manager', 'Sales Associate'] };
 let depChoices = { choices: ['Tech', 'Management', 'Marketing/Sales', 'Finance'] };
 
 function question1() {
