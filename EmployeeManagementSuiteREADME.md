@@ -41,8 +41,11 @@ To test, run the installation process and then use the prompts to try adding to 
 <p align="right">(<a href="#mit-license">back to top</a>)</p>
 
 ## Screenshots
-![]()
+![](./assets/Screen%20Shot%202022-11-07%20at%207.27.55%20PM.png)
+![](./assets/Screen%20Shot%202022-11-07%20at%207.29.24%20PM.png)
+
 <p align="right">(<a href="#mit-license">back to top</a>)</p>
+
 ## Questions
 Github: https://github.com/Bfunk54
 
