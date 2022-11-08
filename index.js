@@ -187,36 +187,7 @@ function AddEmployee() {
         }
         ])
         .then((function (response) {
-            let role_id = `${response.role}`;
-            switch(role_id) {
-                case 'Software developer' :
-                    role_id = 1;
-                    break;
-                case 'UX/UI Designer' :
-                    role_id = 2;
-                    break;
-                case 'Marketing/Sales' :
-                    role_id = 3;
-                    break;
-                case 'Accounting' :
-                    role_id = 4;
-                    break;
-                case 'CFO' :
-                    role_id = 5;
-                    break;
-                case 'CEO' :
-                    role_id = 6;
-                    break;
-                case 'CTO' :
-                    role_id = 7;
-                    break;
-                case 'HR Manager' :
-                    role_id = 8;
-                    break;
-                case 'Marketing Manager' :
-                    role_id = 9;
-                    break;
-            }
+            let found = (roleChoices.choices).indexOf(`${response.role}`);
             switch(response.manager) {
                 case 'John Johnson' :
                     response.manager = 1;
@@ -231,7 +202,7 @@ function AddEmployee() {
                     response.manager = 4;
                     break;
             }
-            db.query(`INSERT INTO employee (first_name, last_name, role_id, manager_id) VALUES ('${response.first_name}', '${response.last_name}', '${role_id}', '${response.manager}')`, response, function (err, result){
+            db.query(`INSERT INTO employee (first_name, last_name, role_id, manager_id) VALUES ('${response.first_name}', '${response.last_name}', '${found}', '${response.manager}')`, response, function (err, result){
                 console.log(`${response.first_name} ${response.last_name} added to Employees.`);
             })
             question1();
@@ -257,23 +228,9 @@ function UpdateEmployeeRole() {
         }
         ])
         .then((function (response) {
-            let role_id = `${response.role}`;
-            switch(role_id) {
-                case 'Software developer' :
-                    role_id = 1;
-                    break;
-                case 'UX/UI Designer' :
-                    role_id = 2;
-                    break;
-                case 'Marketing/Sales' :
-                    role_id = 3;
-                    break;
-                case 'Accounting' :
-                    role_id = 4;
-                    break;
-            }
-            db.query(`UPDATE employee SET role_id = '${role_id}' WHERE first_name = '${response.first_name}' AND last_name = '${response.last_name}'`, response, function (err, result){
-                console.log(`${response.first_name} ${response.last_name} updated.`);
+            let found = (roleChoices.choices).indexOf(`${response.role}`);
+            db.query(`UPDATE employee SET role_id = '${found}' WHERE first_name = '${response.first_name}' AND last_name = '${response.last_name}'`, response, function (err, result){
+                console.log(`The role of ${response.first_name} ${response.last_name} has been updated to ${response.role}.`);
             })
             question1();
         }
