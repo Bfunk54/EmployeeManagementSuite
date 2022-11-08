@@ -22,10 +22,12 @@ const db = mysql.createConnection(
     console.log(`Connected to the management_db database.`)
 );
 
+// Set arrays of answer choices for inquirer
 let roleChoices = { choices: ['Software developer', 'UX/UI Designer', 'Sales Manager', 'Accountant', 'CEO', 'HR Manager', 'Marketing Manager', 'Sales Associate'] };
 let depChoices = { choices: ['Tech', 'Management', 'Marketing/Sales', 'Finance'] };
 let managerChoices = { choices: ['John Johnson', 'Jane Johnson', 'John Johnsonson', 'Jane Johnsonson'] };
 
+// Set the question for inquirer
 function question1() {
     inquirer
     .prompt([
@@ -36,6 +38,7 @@ function question1() {
         choices: ['View all employees', 'Add employee', 'Update employee role', 'View all roles', 'Add role', 'View all departments', 'Add department', 'Quit']
     },
     ])
+    // Use a switch statement to call the correct function based on the user's answer
     .then(function (response) {
         switch(response.action) {
             case 'View all employees' : ViewAllEmployees();
@@ -65,6 +68,7 @@ function question1() {
     })
 }
 
+// Function to add a department
 function AddDepartment() {
 
     inquirer
@@ -85,6 +89,7 @@ function AddDepartment() {
         }))
 }
 
+// Function to add a new role
 function AddRole() {
     inquirer
     .prompt([
@@ -117,6 +122,7 @@ function AddRole() {
         }))
 }
         
+// Function to view all employees
 function ViewAllEmployees() {
     db.query(`SELECT * FROM employee`, function(err, data) {
         if (err) throw err;
@@ -126,6 +132,7 @@ function ViewAllEmployees() {
     })
 }
 
+// Function to view all roles
 function ViewAllRoles() {
     db.query(`SELECT * FROM roles`, function(err, data) {
         if (err) throw err;
@@ -135,6 +142,7 @@ function ViewAllRoles() {
     })
 }
 
+// Function to view all departments
 function ViewAllDepartments() {
     db.query(`SELECT * FROM department`, function(err, data) {
         if (err) throw err;
@@ -144,11 +152,13 @@ function ViewAllDepartments() {
     })
 }
 
+// Function to quit
 function Quit() {
     console.log('Goodbye!');
     process.exit();
 }
 
+// Function to add an employee
 function AddEmployee() {
     inquirer
     .prompt([
@@ -183,6 +193,7 @@ function AddEmployee() {
         }))       
 }
 
+// Function to update an employee's role
 function UpdateEmployeeRole() {
     inquirer
     .prompt([
